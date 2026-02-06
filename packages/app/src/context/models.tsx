@@ -96,7 +96,7 @@ export const { use: useModels, provider: ModelsProvider } = createSimpleContext(
       if (latestSet().has(key)) return true
       const m = find(model)
       if (!m?.release_date || !DateTime.fromISO(m.release_date).isValid) return true
-      return false
+      return Math.abs(DateTime.fromISO(m.release_date).diffNow().as("months")) < 6
     }
 
     const setVisibility = (model: ModelKey, state: boolean) => {
